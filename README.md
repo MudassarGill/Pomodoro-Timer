@@ -7,7 +7,7 @@ A beautifully designed, production-ready Pomodoro Timer web application built wi
 - **Two Distinct Modes:** Deep violet for Focus Mode and calming emerald for Break Mode.
 - **Glassmorphism UI:** Modern frosted glass card design with beautiful glowing shadows.
 - **Animated Progress Ring:** Smooth SVG circular timer ring.
-- **Sound Notifications:** A pleasant chime plays automatically when a session ends.
+- **Human Voice Notifications:** Uses the browser's Text-to-Speech (SpeechSynthesis API) to actually speak to you and announce when your focus or break session is complete!
 - **Session History:** Automatically saves your completed focus sessions for the day.
 - **Persistent Storage:** Your settings and history are saved even if you refresh the page.
 
