@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { minutesToSeconds, calculateProgress } from '../utils/timer';
 import { saveState, loadState } from '../utils/storage';
 import { getTodayString, isNewDay } from '../utils/date';
-import { playNotificationSound } from '../utils/audio';
+import { playVoiceMessage } from '../utils/audio';
 
 export function usePomodoro() {
   const [state, setState] = useState(() => {
@@ -58,8 +58,6 @@ export function usePomodoro() {
   // Handle session completion
   const handleCompletion = useCallback(() => {
     clearTimer();
-    playNotificationSound();
-
     setState(prev => {
       const newState = { ...prev, isRunning: false, isPaused: false };
 
@@ -74,10 +72,14 @@ export function usePomodoro() {
         // Switch to break
         newState.mode = 'break';
         newState.remainingTime = minutesToSeconds(prev.breakDuration);
+        
+        playVoiceMessage(`Great job! You have completed a ${prev.focusDuration} minute focus session. Time for a break.`);
       } else {
         // Break completed, switch to focus
         newState.mode = 'focus';
         newState.remainingTime = minutesToSeconds(prev.focusDuration);
+        
+        playVoiceMessage(`Break is over! Let's get back to focusing for ${prev.focusDuration} minutes.`);
       }
 
       return newState;
